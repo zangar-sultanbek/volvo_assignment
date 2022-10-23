@@ -1,0 +1,18 @@
+$primary-color: rgb(55, 55, 55);
+
+.table_button{
+    display: block;
+    
+    margin: 0 auto;
+    width: 55%;
+    color: #fff;
+    background-color: $primary-color;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    
+    &:hover{
+        cursor: pointer;
+        background-color: darken($primary-color, 5%);
+    }
+}

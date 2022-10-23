@@ -1,0 +1,75 @@
+.form_wrapper{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(darken(#fff, 5%), .5);
+
+    form{
+        background-color: #fff;
+        min-width: 400px;
+        max-width: 400px;
+        padding: 25px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgb(164, 164, 164);
+        animation: slideInAnim cubic-bezier(0.35, 0.29, 0.75, 0.88) 250ms;
+
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+
+        & > *{
+            display: inline-block;
+            width: 100%;
+        }
+
+        .form_warning{
+            color: red;
+        }
+        .form_warning_off{
+            display: none;
+        }
+
+        input{
+            width: 100%;
+            border-radius: 3px;
+            padding: 10px 15px;
+            background-color: darken(#fff, 5%);
+            -moz-appearance: textfield;
+
+            &::-webkit-inner-spin-button,::-webkit-outer-spin-button{
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            &:focus{
+                outline: 2px solid darken(#fff, 20%);
+            }
+        }
+
+        //override
+        .table_button{
+            margin-top: 5px;
+        }
+    }
+}
+.form_wrapper_closed{
+    display: none;
+}
+
+@keyframes slideInAnim {
+    0%{
+        transform: translateY(15px);
+    }
+} 

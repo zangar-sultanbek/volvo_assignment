@@ -1,0 +1,185 @@
+$primary-color: rgb(55, 55, 55);
+
+@mixin tableRowMixin(){
+    display: grid;
+    grid-template-columns: .5fr 1fr 2fr repeat(2, 1fr) 1fr;
+    padding: 0 20px;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.table{
+    min-width: 420px;
+    max-width: 1000px;
+    margin: 20px auto;
+    
+
+    #{&}_headers{
+        @include tableRowMixin;
+
+        border-radius: 5px 5px 0 0;
+        background-color: $primary-color;
+
+        & > .table_cell{
+            padding: 7.5px 0;
+            color: #fff;
+        }
+    }
+
+    #{&}_rows{
+        .table_row{
+            @include tableRowMixin;
+            padding-top: 5px;
+            padding-bottom: 5px;
+
+            .table_cell{
+                overflow-x: hidden;
+                text-transform: capitalize;
+                background-color: transparent;
+            }
+
+            input{
+                transition: padding 300ms;
+                height: 100%;
+            }
+        }
+        .table_row_editable{
+            input{
+                animation: pulsingAnimation 1000ms infinite alternate;
+                border-radius: 3px;
+                padding: 0 5px;
+                
+
+                &:focus{
+                    outline: 1px solid darken(#fff, 25%);
+                }
+            }
+            .character_actions{
+                &_edit_btn{
+                    opacity: .8;
+
+                    path{
+                        fill: green;
+                    }
+                }
+            }
+        }
+        .character{
+            &:nth-child(2n){
+                background-color: darken(#fff, 5%);
+            }
+
+            &_avatar{
+                width: 100%;
+
+                $size: 55px;
+                max-width: $size;
+                width: $size;
+                min-width: $size;
+                height: $size;
+                max-height: $size;
+                min-height: $size;
+
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center center;
+            }
+            &_id{
+                color: rgba(0, 0, 0, 0.3);
+            }
+            // &_name{}
+            // &_species{}
+
+            &_status{
+                &_dead{
+                    color: red
+                }
+            }
+            &_actions{
+                display: flex;
+                align-items: stretch;
+                justify-content: flex-start;
+                height: 100%;
+
+                &_btn{
+                    flex: 1;
+                    text-align: left;
+                    background-color: transparent;
+                    font-weight: bold;
+                    
+                    transition: opacity 300ms;
+                    opacity: .5;
+
+                    &:hover{
+                        cursor: pointer;
+                        text-decoration: underline;
+                        opacity: 1;
+                    }
+                }
+
+                &_edit_btn{
+                    &:hover{
+                        animation: editBtnAnimation 200ms 200ms infinite alternate;
+                    }
+                }
+                &_delete_btn{
+
+                    path{
+                        transition: fill 300ms;
+                    }
+                    &:hover{
+                        path{
+                           fill: red;
+                        }
+                    }
+                }
+            }
+            
+        }   
+    }
+
+    #{&}_button{
+        position: sticky;
+        bottom: 1%;
+        margin-top: 15px;
+    }
+
+    #{&}_empty_warning{
+        padding-top: 15px;
+        animation: opacityAnim 1s alternate infinite;
+        user-select: none;
+    }
+}
+
+
+@keyframes editBtnAnimation{
+    0%{
+        // rotate: 0deg;
+        transform: 
+            rotate(0deg)
+            translateX(0) translateY(0);
+    }
+    100%{
+        transform: 
+        rotate(22deg)
+        translateX(5px) translateY(10px);
+    }
+}
+
+@keyframes pulsingAnimation{
+    0%{
+        background-color: transparent;
+    }
+    100%{
+        background-color: darken(#fff, 8%);
+    }
+}
+
+@keyframes opacityAnim{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
