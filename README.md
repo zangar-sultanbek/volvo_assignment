@@ -13,3 +13,6 @@ The project consists of several main components:
   TableForm - represents the form used to fetch new data from the API
   TableButton - represents the reusable UI element of a <button>
 
+![image](https://user-images.githubusercontent.com/105586576/197415665-f495c1b6-5abf-4b7d-8237-2bf2ff611fcd.png)
+![image](https://user-images.githubusercontent.com/105586576/197415671-ae99b5a4-9afd-4ce2-a231-189e988a1dc4.png)
+![image](https://user-images.githubusercontent.com/105586576/197415677-a6c20d39-ae51-46f2-9e95-c9a4b5a22434.png)
