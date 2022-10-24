@@ -26,6 +26,16 @@ const Table = () => {
     const handleAddCharacter = useCallback(
         (newCharacter) => setCharacters(state => [newCharacter, ...state,]), []
     );
+    const handleEditCharacter = useCallback(
+        (id, details) => {
+            const matchedCharacterIndex = characters.findIndex(character => character.id === id);
+            if(matchedCharacterIndex < 0) return console.log(`No character for the corresponding ID found`);
+
+            const deepCopy = JSON.parse(JSON.stringify(characters));
+            deepCopy[matchedCharacterIndex] = {...deepCopy[matchedCharacterIndex], ...details};
+            setCharacters(deepCopy);
+        }, [characters]
+    );
     const handleFormOpen = useCallback(
         () => setIsFormOpen(state => !state), []
     )
@@ -54,7 +64,7 @@ const Table = () => {
                 {tableHeaders.map(header => <div className='table_cell' key={header}>{header}</div>)}
             </div>
             {characters.length
-            ? <TableRows characters={charactersMemoSorted} handleRemoveCharacter={handleRemoveCharacter}/>
+            ? <TableRows characters={charactersMemoSorted} handleRemoveCharacter={handleRemoveCharacter} handleEditCharacter={handleEditCharacter}/>
             : <div className='table_empty_warning'>Add some characters!</div>}
             <TableButton text={`Add a character`} onClick={handleFormOpen} type='button'/>
             

@@ -7,13 +7,16 @@ const EditSvg = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" p
 const DeleteSvg = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="gray" d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8L2.146 2.854Z"/></svg>
 
 
-const TableRow = ({id, image, name, species, status, handleRemoveCharacter}) => {
+const TableRow = ({id, image, name, species, status, handleRemoveCharacter, handleEditCharacter}) => {
   const [characterDetails, setCharacterDetails] = useState({name, species, status});
   const [isEditable, setIsEditable] = useState(false);
   const nameInputRef = useRef(null);
 
   const handleCharacterDetails = ({target : {name, value}}) => setCharacterDetails(state => ({...state, [name] : value}));
-  const handleEditable = () => setIsEditable(state => !state);
+  const handleEditing = () => {
+    if(isEditable) handleEditCharacter(id, characterDetails);
+    setIsEditable(state => !state);
+  };
   const removeCharacter = () => handleRemoveCharacter(id);
 
   useEffect(
@@ -44,7 +47,7 @@ const TableRow = ({id, image, name, species, status, handleRemoveCharacter}) => 
             <button 
             className='character_actions_btn character_actions_edit_btn' 
             type='button'
-            onClick={handleEditable}>{EditSvg}</button>
+            onClick={handleEditing}>{EditSvg}</button>
             <button 
             className='character_actions_btn character_actions_delete_btn' 
             type='button'
